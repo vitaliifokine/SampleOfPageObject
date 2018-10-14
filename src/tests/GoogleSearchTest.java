@@ -76,7 +76,7 @@ public class GoogleSearchTest extends BaseTest{
         };
     }
 
-    @Test(dataProvider = "Authentication")
+    @Test(dataProvider = "Authentication", enabled = true)
         public void doGoogleSearch6(String searchItem, String expectedItem){
             System.setProperty("chromedriver", "/Users/juliakolesnyk/Desktop/LessonSample/chromedriver");
             WebDriver driver = new ChromeDriver();
