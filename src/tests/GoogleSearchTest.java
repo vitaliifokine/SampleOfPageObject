@@ -68,24 +68,28 @@ public class GoogleSearchTest extends BaseTest{
 
     @DataProvider(name = "Authentication")
     public static Object[][] credentials() {
+        String siteForSearch = "LinkedIn";
         return new Object[][] {
-                {"LinkedIn", "LinkedIn: Log In or Sign Up" },
+                {siteForSearch, "LinkedIn: Log In or Sign Up" },
                 {"Google", "Google"},
                 {"Facebook", "Facebook - Log In or Sign Up"},
+                {"Zara", "ZARA United States | New Collection Online"},
+                {"NBA results Lakers", "ZARA United States | New Collection Online"},
+                {"NBA results Lebron", "ZARA United States | New Collection Online"},
+                {"Latest news", "ZARA United States | New Collection Online"},
+                {"Dynamo Kyiv", "ZARA United States | New Collection Online"},
                 {"Netflix", "Netflix - Watch TV Shows Online, Watch Movies Online"}
         };
     }
 
     @Test(dataProvider = "Authentication", enabled = true)
         public void doGoogleSearch6(String searchItem, String expectedItem){
-            System.setProperty("chromedriver", "/Users/juliakolesnyk/Desktop/LessonSample/chromedriver");
-            WebDriver driver = new ChromeDriver();
-            driver.get("https://www.google.com");
-            driver.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(searchItem);
-            driver.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(Keys.ENTER);
-            WebDriverWait wait = new WebDriverWait(driver, 15);
+            wd.get("https://www.google.com");
+            wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(searchItem);
+            wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(Keys.ENTER);
+            WebDriverWait wait = new WebDriverWait(wd, 15);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#logo > img")));
-            List<WebElement> t = driver.findElements(By.cssSelector("#search h3.LC20lb"));
+            List<WebElement> t = wd.findElements(By.cssSelector("#search h3.LC20lb"));
             for(WebElement i: t) {
                 System.out.println(i.getText()); }
             Assert.assertEquals(t.get(0).getText(), expectedItem);
@@ -94,18 +98,81 @@ public class GoogleSearchTest extends BaseTest{
 
     @Test(dataProvider = "Authentication")
     public void doGoogleSearch7(String volodya, String siteLinkVolodya){
-        System.setProperty("chromedriver", "/Users/juliakolesnyk/Desktop/LessonSample/chromedriver");
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://www.google.com");
-        driver.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(volodya);
-        driver.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(Keys.ENTER);
-        WebDriverWait wait = new WebDriverWait(driver, 15);
+        wd.get("https://www.google.com");
+        wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(volodya);
+        wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(Keys.ENTER);
+        WebDriverWait wait = new WebDriverWait(wd, 15);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#logo > img")));
-        List<WebElement> t = driver.findElements(By.cssSelector("#search h3.LC20lb"));
+        List<WebElement> t = wd.findElements(By.cssSelector("#search h3.LC20lb"));
         for(WebElement i: t) {
             System.out.println(i.getText());
         }
         Assert.assertEquals(t.get(0).getText(), siteLinkVolodya);
         t.get(0).click();
     }
+
+
+    @DataProvider(name = "Cities")
+    public static Object[][] cities() {
+        String siteForSearch = "LinkedIn";
+        return new Object[][] {
+                {"Boston" },
+                {"Tokyo"},
+                {"London"},
+                {"Washington"},
+                {"Los Angeles"},
+                {"Philadelphia"},
+                {"Jersey City"},
+                {"Berlin"},
+                {"Madrid"}
+        };
+    }
+
+    @Test(dataProvider = "Cities")
+    public void doMapsSearch(String cities){
+        String searchedItem = cities;
+        wd.get("https://www.google.com");
+        wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys("Google Maps");
+        wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(Keys.ENTER);
+        WebDriverWait wait = new WebDriverWait(wd, 15);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#logo > img")));
+        List<WebElement> t = wd.findElements(By.cssSelector("#search h3.LC20lb"));
+        t.get(0).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#searchboxinput")));
+        wd.findElement(By.cssSelector("#searchboxinput")).sendKeys(searchedItem);
+        wd.findElement(By.cssSelector("#searchboxinput")).sendKeys(Keys.ENTER);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.section-hero-header-description > div:nth-child(1) > h1")));
+        Assert.assertEquals(wd.findElement(By.cssSelector("div.section-hero-header-description > div:nth-child(1) > h1")).getText(), searchedItem);
+    }
+
+    @DataProvider(name = "Destinations")
+    public static Object[][] destinations() {
+        return new Object[][] {
+                {"Paramus", "Philadelphia" },
+                {"Paramus", "Journal Square"},
+                {"Weehawken", "Hoboken"},
+                {"Weehawken", "Journal Square"},
+        };
+    }
+
+    @Test(dataProvider = "Destinations")
+    public void doMapsSearch2(String from, String to) {
+        wd.get("https://www.google.com");
+        wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys("Google Maps");
+        wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(Keys.ENTER);
+        WebDriverWait wait = new WebDriverWait(wd, 15);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#logo > img")));
+        List<WebElement> t = wd.findElements(By.cssSelector("#search h3.LC20lb"));
+        t.get(0).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#searchboxinput")));
+        wd.findElement(By.cssSelector("#searchbox-directions")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#sb_ifc51 > input")));
+        wd.findElement(By.cssSelector("#sb_ifc51 > input")).sendKeys(from);
+        wd.findElement(By.cssSelector("#sb_ifc52 > input")).sendKeys(to);
+        wd.findElement(By.cssSelector("#sb_ifc52 > input")).sendKeys(Keys.ENTER);
+        wd.findElement(By.cssSelector("div.directions-travel-mode-icon.directions-transit-icon")).click();
+        WebElement webElements = wd.findElement(By.cssSelector("div.section-directions-trip-numbers > div"));
+            System.out.println("Using public transportation Currently from location: "+from+" to location: "+to+" is: "+webElements.getText());
+    }
+
 }

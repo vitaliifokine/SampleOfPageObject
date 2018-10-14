@@ -1,5 +1,6 @@
 package tests;
 
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import utils.DriverFactory;
@@ -17,8 +18,8 @@ public class BaseTest extends DriverFactory
         wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
-        @AfterTest
-        public void quit() {
-        wd.quit();
-    }
+//        @AfterTest
+//        public void quit() {
+//        wd.quit();
+//    }
 }
