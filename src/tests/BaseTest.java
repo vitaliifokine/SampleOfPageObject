@@ -4,6 +4,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import utils.DriverFactory;
 
+import java.util.concurrent.TimeUnit;
+
 public class BaseTest extends DriverFactory
 
     {
@@ -12,10 +14,11 @@ public class BaseTest extends DriverFactory
         public void setUp() {
         wd = DriverFactory.setBrowser("chrome");
         wd.manage().window().maximize();
+        wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
-//        @AfterTest
-//        public void quit() {
-//        wd.quit();
-//    }
+        @AfterTest
+        public void quit() {
+        wd.quit();
+    }
 }
