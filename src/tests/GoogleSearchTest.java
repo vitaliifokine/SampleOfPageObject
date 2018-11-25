@@ -95,7 +95,7 @@ public class GoogleSearchTest extends BaseTest{
             t.get(0).click();
         }
 
-    @Test(dataProvider = "Authentication")
+    @Test(dataProvider = "Authentication", description = "searchTest")
     public void doGoogleSearch7(String volodya, String siteLinkVolodya){
         wd.get("https://www.google.com");
         wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(volodya);
@@ -126,7 +126,7 @@ public class GoogleSearchTest extends BaseTest{
         };
     }
 
-    @Test(dataProvider = "Cities")
+    @Test(dataProvider = "Cities", description = "map verification")
     public void doMapsSearch(String cities){
         String searchedItem = cities;
         wd.get("https://www.google.com");
@@ -151,7 +151,7 @@ public class GoogleSearchTest extends BaseTest{
         };
     }
 
-    @Test(dataProvider = "Destinations")
+    @Test(dataProvider = "Destinations", description = "Provide search")
     public void doMapsSearch2(String from, String to) throws IOException {
         wd.get("https://www.google.com");
         wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys("Google Maps");
