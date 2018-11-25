@@ -7,6 +7,13 @@
     <groupId>pageObjectSample</groupId>
     <artifactId>SampleOfPageObject</artifactId>
     <version>1.0</version>
+
+    <properties>
+    <java.version>1.8</java.version>
+    <aspectj.version>1.8.10</aspectj.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <suiteXmlFile>full_suite.xml</suiteXmlFile>
+</properties>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.testng/testng -->
         <dependency>
@@ -34,8 +41,38 @@
             <artifactId>selenide</artifactId>
             <version>4.14.1</version>
         </dependency>
-
-
     </dependencies>
+
+    <build>
+        <sourceDirectory>${basedir}/src</sourceDirectory>
+        <testSourceDirectory>${basedir}/src</testSourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.8</version>
+                <configuration>
+                    <reportVersion>2.3.1</reportVersion>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18.1</version>
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>${project.basedir}/suites/${suiteXmlFile}</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+                <dependencies>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+
 
 </project>

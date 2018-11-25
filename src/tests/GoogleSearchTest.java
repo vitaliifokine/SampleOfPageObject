@@ -1,7 +1,9 @@
 package tests;
 
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -11,10 +13,7 @@ import org.testng.annotations.Test;
 import pages.ResultPage;
 import pages.SearchPage;
 
-import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class GoogleSearchTest extends BaseTest{
@@ -171,13 +170,5 @@ public class GoogleSearchTest extends BaseTest{
         WebElement webElements = wd.findElement(By.cssSelector("div.section-directions-trip-numbers > div"));
         captureScreenshot();
             System.out.println("Using public transportation Currently from location: "+from+" to location: "+to+" is: "+webElements.getText());
-    }
-
-
-    private void captureScreenshot()throws IOException {
-        String extension = ".png";
-        File scrFile = ((TakesScreenshot)wd).getScreenshotAs(OutputType.FILE);
-        String timestamp = new SimpleDateFormat("yyyy_MM_dd__hh_mm_ss").format(new Date());
-        FileUtils.copyFile(scrFile, new File("./screenshots" +timestamp+extension));
     }
 }
