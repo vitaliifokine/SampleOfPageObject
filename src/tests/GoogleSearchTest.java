@@ -154,7 +154,7 @@ public class GoogleSearchTest extends BaseTest{
     @Test(dataProvider = "Destinations", description = "Provide search")
     public void doMapsSearch2(String from, String to) throws IOException {
         wd.get("https://www.google.com");
-        wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys("Google Maps");
+        wd.findElement(By.cssSelector("")).sendKeys("Google Maps");
         wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(Keys.ENTER);
         WebDriverWait wait = new WebDriverWait(wd, 15);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#logo > img")));
