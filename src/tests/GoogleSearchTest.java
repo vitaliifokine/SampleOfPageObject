@@ -10,7 +10,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 import pages.GoogleResultPage;
 import pages.SearchPage;
@@ -22,6 +21,7 @@ import static java.util.stream.Collectors.toMap;
 
 public class GoogleSearchTest extends BaseTest{
     Map<String, Integer> hmap = new HashMap<String, Integer>();
+    int counter = 0;
 
     @Test
     public void doGoogleSearch(){
@@ -66,16 +66,17 @@ public class GoogleSearchTest extends BaseTest{
 
     @Test(dataProvider = "clubs", dataProviderClass = FootballClubs.class)
     public void searchAndSortBySearchPopularity(String searchItem){
+        counter++;
         SearchPage searchPage = new SearchPage(wd);
         Integer quantity = searchPage.openSearchPage()
                 .doSearchOf(searchItem)
                 .getResultQuantityOfSearches();
         hmap.put(searchItem, quantity);
-        //System.out.println(quantity);
-
+        if (FootballClubs.cities().length == counter){
+            this.after();
+        }
     }
 
-    @AfterClass
     public void after(){
         Map<String, Integer> u = hmap.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
                 .collect(toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2,
