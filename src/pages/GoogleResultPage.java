@@ -13,13 +13,12 @@ public class GoogleResultPage extends BasePage{
     @FindBy (css = "h3.LC20lb")
     List<WebElement> searchResultsHeaderLines;
 
-    @FindBy(css = "#logo > img")
-    private WebElement searchResultLogo;
+    @FindBy (css = "#search h3.LC20lb")
+    List<WebElement> headerDescription;
 
     public GoogleResultPage(WebDriver driver) {
         super(driver);
     }
-
 
     public void clickOnLinkByValue(int linkValue){
          searchResultsHeaders.get(linkValue).click();
@@ -29,8 +28,17 @@ public class GoogleResultPage extends BasePage{
         return searchResultsHeaders.get(0).getText();
     }
 
-    public void openFirstGoogleLink (){
-        waitUntilDisplayedBy(searchResultLogo);
+    public GoogleResultPage openFirstGoogleLink (){
+
         searchResultsHeaderLines.get(0).click();
+        return this;
+    }
+
+    public void printTitlesInConsole() {
+        List<WebElement> t = headerDescription;
+        for (WebElement i : t) {
+            System.out.println(i.getText());
+        }
+        t.get(0).click();
     }
 }

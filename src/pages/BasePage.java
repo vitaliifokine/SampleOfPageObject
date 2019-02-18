@@ -1,6 +1,5 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -16,6 +15,6 @@ public class BasePage extends DriverFactory {
 
     public void waitUntilDisplayedBy(WebElement webelement){
         WebDriverWait wait = new WebDriverWait(wd, 10);
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated((By) webelement));
+        wait.until(ExpectedConditions.visibilityOf(webelement));
     }
 }

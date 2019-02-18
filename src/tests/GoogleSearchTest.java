@@ -2,9 +2,7 @@ package tests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -44,19 +42,11 @@ public class GoogleSearchTest extends BaseTest{
     }
 
     @Test
-    public void doGoogleSearch3(){
-        System.setProperty("chromedriver", "/Users/juliakolesnyk/Desktop/LessonSample/chromedriver");
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://www.google.com");
-        driver.findElement(By.cssSelector("div.a4bIc > input")).sendKeys("LinkedIn");
-        driver.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(Keys.ENTER);
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#logo > img")));
-        List<WebElement> t = driver.findElements(By.cssSelector("#search h3.LC20lb"));
-        for(WebElement i: t) {
-            System.out.println(i.getText());
-        }
-        t.get(0).click();
+    public void printGoogleHeaders(){
+        SearchPage searchPage = new SearchPage(wd);
+        searchPage.openSearchPage()
+                .doSearchOf("LinkedIn")
+                .printTitlesInConsole();
     }
 
 
