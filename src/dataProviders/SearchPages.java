@@ -11,10 +11,9 @@ public class SearchPages {
                 {"Google", "Google"},
                 {"Facebook", "Facebook - Log In or Sign Up"},
                 {"Zara", "ZARA United States | New Collection Online"},
-                {"NBA results Lakers", "ZARA United States | New Collection Online"},
-                {"NBA results Lebron", "ZARA United States | New Collection Online"},
+                {"NBA results Lakers", "Los Angeles Lakers Basketball - Lakers News, Scores, Stats, Rumors ..."},
                 {"Latest news", "ZARA United States | New Collection Online"},
-                {"Dynamo Kyiv", "ZARA United States | New Collection Online"},
+                {"Dynamo Kyiv", "FC Dynamo Kyiv - Wikipedia"},
                 {"Netflix", "Netflix - Watch TV Shows Online, Watch Movies Online"}};
     }
 }

@@ -1,8 +1,10 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -15,6 +17,9 @@ public class GoogleResultPage extends BasePage{
 
     @FindBy (css = "#search h3.LC20lb")
     List<WebElement> headerDescription;
+
+    @FindBy (css = "#topabar #resultStats")
+    WebElement resultsQuantity;
 
     public GoogleResultPage(WebDriver driver) {
         super(driver);
@@ -41,4 +46,19 @@ public class GoogleResultPage extends BasePage{
         }
         t.get(0).click();
     }
+
+    public void validateGoogleSearchHeaders(String expectedItem) {
+        List<WebElement> t = wd.findElements(By.cssSelector("#search h3.LC20lb"));
+        for (WebElement i : t) {
+            System.out.println(i.getText());
+        }
+        Assert.assertEquals(t.get(0).getText(), expectedItem);
+        t.get(0).click();
+    }
+
+    public Integer getResultQuantityOfSearches(){
+        return Integer.parseInt(resultsQuantity.getText().split(" ")[1]
+                .replace(",", ""));
+    }
+
 }

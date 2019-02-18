@@ -2,6 +2,7 @@ package tests;
 
 import dataProviders.Cities;
 import dataProviders.Destinations;
+import dataProviders.FootballClubs;
 import dataProviders.SearchPages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -9,14 +10,18 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 import pages.GoogleResultPage;
 import pages.SearchPage;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.*;
+
+import static java.util.stream.Collectors.toMap;
 
 public class GoogleSearchTest extends BaseTest{
+    Map<String, Integer> hmap = new HashMap<String, Integer>();
 
     @Test
     public void doGoogleSearch(){
@@ -51,20 +56,36 @@ public class GoogleSearchTest extends BaseTest{
                 .printTitlesInConsole();
     }
 
-
     @Test(dataProvider = "searchPages", dataProviderClass = SearchPages.class)
-        public void doGoogleSearch6(String searchItem, String expectedItem){
-            wd.get("https://www.google.com");
-            wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(searchItem);
-            wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(Keys.ENTER);
-            WebDriverWait wait = new WebDriverWait(wd, 15);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#logo > img")));
-            List<WebElement> t = wd.findElements(By.cssSelector("#search h3.LC20lb"));
-            for(WebElement i: t) {
-                System.out.println(i.getText()); }
-            Assert.assertEquals(t.get(0).getText(), expectedItem);
-            t.get(0).click();
+        public void validateGoogleSearchHeaders(String searchItem, String expectedItem){
+        SearchPage searchPage = new SearchPage(wd);
+        searchPage.openSearchPage()
+                .doSearchOf(searchItem)
+                .validateGoogleSearchHeaders(expectedItem);
         }
+
+    @Test(dataProvider = "clubs", dataProviderClass = FootballClubs.class)
+    public void searchAndSortBySearchPopularity(String searchItem){
+        SearchPage searchPage = new SearchPage(wd);
+        Integer quantity = searchPage.openSearchPage()
+                .doSearchOf(searchItem)
+                .getResultQuantityOfSearches();
+        hmap.put(searchItem, quantity);
+        //System.out.println(quantity);
+
+    }
+
+    @AfterClass
+    public void after(){
+        Map<String, Integer> u = hmap.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+                .collect(toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2,
+                        LinkedHashMap::new));
+        int y= 1;
+        for (Map.Entry entry : u.entrySet()) {
+            System.out.println(y + ": " + entry.getKey() + ", " + entry.getValue());
+            y++;
+        }
+    }
 
     @Test(dataProvider = "searchPages", dataProviderClass = SearchPages.class)
     public void doGoogleSearch7(String volodya, String siteLinkVolodya){
