@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.ResultPage;
+import pages.GoogleResultPage;
 import pages.SearchPage;
 
 import java.io.IOException;
@@ -22,30 +22,25 @@ public class GoogleSearchTest extends BaseTest{
     public void doGoogleSearch(){
      SearchPage searchPage = new SearchPage(wd);
      searchPage.openSearchPage()
-             .doSearchWithInput("Last News");
+             .doSearchOf("Last News");
     }
 
     @Test
     public void doGoogleSearchWithAnotherInput(){
         SearchPage searchPage = new SearchPage(wd);
         searchPage.openSearchPage()
-                .doSearchWithInput("NBA starting date");
-        ResultPage resultPage = new ResultPage(wd);
+                .doSearchOf("NBA starting date");
+        GoogleResultPage resultPage = new GoogleResultPage(wd);
         Assert.assertEquals(resultPage.getFirstHeaderFromSearchPage(),
                 "Key dates for 2018-19 NBA season | NBA.com");
     }
 
-    @Test(enabled = false)
-    public void doGoogleSearch2(){
-        System.setProperty("chromedriver", "/Users/juliakolesnyk/Desktop/LessonSample/chromedriver");
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://www.google.com");
-        driver.findElement(By.cssSelector("div.a4bIc > input")).sendKeys("LinkedIn");
-        driver.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(Keys.ENTER);
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#logo > img")));
-        driver.findElements(By.cssSelector("h3.LC20lb")).get(0).click();
-        System.out.println();
+    @Test()
+    public void searchAndOpenFirstLink(){
+        SearchPage searchPage = new SearchPage(wd);
+        searchPage.openSearchPage()
+                .doSearchOf("LinkedIn")
+                .openFirstGoogleLink();
     }
 
     @Test

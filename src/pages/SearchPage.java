@@ -10,7 +10,6 @@ public class SearchPage extends BasePage {
     @FindBy(css = "div.a4bIc > input")
     private WebElement searchInput;
 
-
     public SearchPage(WebDriver driver) {
         super(driver);
     }
@@ -20,16 +19,17 @@ public class SearchPage extends BasePage {
         return this;
     }
 
-    public ResultPage doSearchWithInput(String searchText){
+    public GoogleResultPage doSearchOf(String searchText){
         searchInput.sendKeys(searchText);
         wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(searchText);
         wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(Keys.ENTER);
-        return new ResultPage(wd);
+        return new GoogleResultPage(wd);
     }
 
     public void  getSearchedText(String searchText){
         searchInput.getText();
-
     }
+
+
 
 }
