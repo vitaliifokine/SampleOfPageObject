@@ -1,12 +1,14 @@
 package tests;
 
+import dataProviders.Cities;
+import dataProviders.Destinations;
+import dataProviders.SearchPages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.GoogleResultPage;
 import pages.SearchPage;
@@ -50,23 +52,7 @@ public class GoogleSearchTest extends BaseTest{
     }
 
 
-    @DataProvider(name = "Authentication")
-    public static Object[][] credentials() {
-        String siteForSearch = "LinkedIn";
-        return new Object[][] {
-                {siteForSearch, "LinkedIn: Log In or Sign Up" },
-                {"Google", "Google"},
-                {"Facebook", "Facebook - Log In or Sign Up"},
-                {"Zara", "ZARA United States | New Collection Online"},
-                {"NBA results Lakers", "ZARA United States | New Collection Online"},
-                {"NBA results Lebron", "ZARA United States | New Collection Online"},
-                {"Latest news", "ZARA United States | New Collection Online"},
-                {"Dynamo Kyiv", "ZARA United States | New Collection Online"},
-                {"Netflix", "Netflix - Watch TV Shows Online, Watch Movies Online"}
-        };
-    }
-
-    @Test(dataProvider = "Authentication", enabled = true)
+    @Test(dataProvider = "searchPages", dataProviderClass = SearchPages.class)
         public void doGoogleSearch6(String searchItem, String expectedItem){
             wd.get("https://www.google.com");
             wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(searchItem);
@@ -80,7 +66,7 @@ public class GoogleSearchTest extends BaseTest{
             t.get(0).click();
         }
 
-    @Test(dataProvider = "Authentication", description = "searchTest")
+    @Test(dataProvider = "searchPages", dataProviderClass = SearchPages.class)
     public void doGoogleSearch7(String volodya, String siteLinkVolodya){
         wd.get("https://www.google.com");
         wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(volodya);
@@ -95,23 +81,7 @@ public class GoogleSearchTest extends BaseTest{
         t.get(0).click();
     }
 
-
-    @DataProvider(name = "Cities")
-    public static Object[][] cities() {
-        return new Object[][] {
-                {"Boston" },
-                {"Tokyo"},
-                {"London"},
-                {"Washington"},
-                {"Los Angeles"},
-                {"Philadelphia"},
-                {"Jersey City"},
-                {"Berlin"},
-                {"Madrid"}
-        };
-    }
-
-    @Test(dataProvider = "Cities", description = "map verification")
+    @Test(dataProvider = "cities", dataProviderClass = Cities.class)
     public void doMapsSearch(String cities){
         String searchedItem = cities;
         wd.get("https://www.google.com");
@@ -128,15 +98,9 @@ public class GoogleSearchTest extends BaseTest{
         Assert.assertEquals(wd.findElement(By.cssSelector("div.section-hero-header-description > div:nth-child(1) > h1")).getText(), searchedItem);
     }
 
-    @DataProvider(name = "Destinations")
-    public static Object[][] destinations() {
-        return new Object[][] {
-                {"Journal Square", "Hoboken"},
-                {"Journal Square", "Times Square"}
-        };
-    }
 
-    @Test(dataProvider = "Destinations", description = "Provide search")
+
+    @Test(dataProvider = "Destinations", dataProviderClass = Destinations.class)
     public void doMapsSearch2(String from, String to) throws IOException {
         wd.get("https://www.google.com");
         wd.findElement(By.cssSelector("")).sendKeys("Google Maps");
