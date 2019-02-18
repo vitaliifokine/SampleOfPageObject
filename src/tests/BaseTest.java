@@ -17,7 +17,6 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest extends DriverFactory {
-
     @BeforeTest
     public void setUp() {
     wd = DriverFactory.setBrowser("chrome");

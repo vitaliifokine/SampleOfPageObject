@@ -11,12 +11,16 @@ import static java.util.stream.Collectors.toMap;
 
 public class SearchPage extends BasePage {
     Map<String, Integer> hmap = new HashMap<String, Integer>();
+    Map<String, String> stadium = new HashMap<String, String>();
 
     @FindBy(css = "div.a4bIc > input")
     private WebElement searchInput;
 
     @FindBy(css = "#logo > img")
     private WebElement searchResultLogo;
+
+    @FindBy(xpath = "//a[contains(text(), \"/Stadium\")]/../following-sibling::span/a")
+    private WebElement stadiumValue;
 
     public SearchPage(WebDriver driver) {
         super(driver);
@@ -29,7 +33,7 @@ public class SearchPage extends BasePage {
 
     public void  sortByPopularity(List<String> values){
         Map<String, Integer> results = getSortedResults(values);
-        print(results);
+        printMapWithInt(results);
     }
 
     public GoogleResultPage doSearchOf(String searchText){
@@ -38,6 +42,15 @@ public class SearchPage extends BasePage {
         searchInput.sendKeys(Keys.ENTER);
         waitUntilDisplayedBy(searchResultLogo);
         return new GoogleResultPage(wd);
+    }
+
+    public void doSearchAndCheckCoach(List<String> values){
+        for (String i:values) {
+            doSearchOf(i);
+            String stadiumText = stadiumValue.getText();;
+            stadium.put(i, stadiumText);
+        }
+        printMapWithString(stadium);
     }
 
     public void  getSearchedText(String searchText){
@@ -55,11 +68,19 @@ public class SearchPage extends BasePage {
                         LinkedHashMap::new));
     }
 
-    private void  print(Map<String, Integer> u){
+    private void printMapWithInt(Map<String, Integer> u){
         int y= 1;
         for (Map.Entry entry : u.entrySet()) {
             System.out.println(y + ": " + entry.getKey() + ", " + entry.getValue());
             y++;
     }}
+
+    private void printMapWithString(Map<String, String> u){
+        int y= 1;
+        for (Map.Entry entry : u.entrySet()) {
+            System.out.println(y + ": " + entry.getKey() + ": " + entry.getValue());
+            y++;
+        }}
+
 
 }
