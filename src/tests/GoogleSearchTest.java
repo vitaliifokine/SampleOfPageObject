@@ -2,6 +2,7 @@ package tests;
 
 import dataProviders.Cities;
 import dataProviders.Destinations;
+import dataProviders.FootballClubs;
 import dataProviders.SearchPages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
