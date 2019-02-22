@@ -1,101 +1,94 @@
 package tests;
 
+import dataProviders.Cities;
+import dataProviders.Destinations;
+import dataProviders.FootballClubs;
+import dataProviders.SearchPages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.ResultPage;
+import pages.GoogleResultPage;
 import pages.SearchPage;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.*;
+
+import static java.util.stream.Collectors.toMap;
 
 public class GoogleSearchTest extends BaseTest{
+    Map<String, Integer> hmap = new HashMap<String, Integer>();
+    int counter = 0;
 
     @Test
     public void doGoogleSearch(){
      SearchPage searchPage = new SearchPage(wd);
      searchPage.openSearchPage()
-             .doSearchWithInput("Last News");
+             .doSearchOf("Last News");
     }
 
     @Test
     public void doGoogleSearchWithAnotherInput(){
         SearchPage searchPage = new SearchPage(wd);
         searchPage.openSearchPage()
-                .doSearchWithInput("NBA starting date");
-        ResultPage resultPage = new ResultPage(wd);
+                .doSearchOf("NBA starting date");
+        GoogleResultPage resultPage = new GoogleResultPage(wd);
         Assert.assertEquals(resultPage.getFirstHeaderFromSearchPage(),
                 "Key dates for 2018-19 NBA season | NBA.com");
     }
 
-    @Test(enabled = false)
-    public void doGoogleSearch2(){
-        System.setProperty("chromedriver", "/Users/juliakolesnyk/Desktop/LessonSample/chromedriver");
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://www.google.com");
-        driver.findElement(By.cssSelector("div.a4bIc > input")).sendKeys("LinkedIn");
-        driver.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(Keys.ENTER);
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#logo > img")));
-        driver.findElements(By.cssSelector("h3.LC20lb")).get(0).click();
-        System.out.println();
+    @Test()
+    public void searchAndOpenFirstLink(){
+        SearchPage searchPage = new SearchPage(wd);
+        searchPage.openSearchPage()
+                .doSearchOf("LinkedIn")
+                .openFirstGoogleLink();
     }
 
     @Test
-    public void doGoogleSearch3(){
-        System.setProperty("chromedriver", "/Users/juliakolesnyk/Desktop/LessonSample/chromedriver");
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://www.google.com");
-        driver.findElement(By.cssSelector("div.a4bIc > input")).sendKeys("LinkedIn");
-        driver.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(Keys.ENTER);
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#logo > img")));
-        List<WebElement> t = driver.findElements(By.cssSelector("#search h3.LC20lb"));
-        for(WebElement i: t) {
-            System.out.println(i.getText());
-        }
-        t.get(0).click();
+    public void printGoogleHeaders(){
+        SearchPage searchPage = new SearchPage(wd);
+        searchPage.openSearchPage()
+                .doSearchOf("LinkedIn")
+                .printTitlesInConsole();
     }
 
-
-    @DataProvider(name = "Authentication")
-    public static Object[][] credentials() {
-        String siteForSearch = "LinkedIn";
-        return new Object[][] {
-                {siteForSearch, "LinkedIn: Log In or Sign Up" },
-                {"Google", "Google"},
-                {"Facebook", "Facebook - Log In or Sign Up"},
-                {"Zara", "ZARA United States | New Collection Online"},
-                {"NBA results Lakers", "ZARA United States | New Collection Online"},
-                {"NBA results Lebron", "ZARA United States | New Collection Online"},
-                {"Latest news", "ZARA United States | New Collection Online"},
-                {"Dynamo Kyiv", "ZARA United States | New Collection Online"},
-                {"Netflix", "Netflix - Watch TV Shows Online, Watch Movies Online"}
-        };
-    }
-
-    @Test(dataProvider = "Authentication", enabled = true)
-        public void doGoogleSearch6(String searchItem, String expectedItem){
-            wd.get("https://www.google.com");
-            wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(searchItem);
-            wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(Keys.ENTER);
-            WebDriverWait wait = new WebDriverWait(wd, 15);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#logo > img")));
-            List<WebElement> t = wd.findElements(By.cssSelector("#search h3.LC20lb"));
-            for(WebElement i: t) {
-                System.out.println(i.getText()); }
-            Assert.assertEquals(t.get(0).getText(), expectedItem);
-            t.get(0).click();
+    @Test(dataProvider = "searchPages", dataProviderClass = SearchPages.class)
+        public void validateGoogleSearchHeaders(String searchItem, String expectedItem){
+        SearchPage searchPage = new SearchPage(wd);
+        searchPage.openSearchPage()
+                .doSearchOf(searchItem)
+                .validateGoogleSearchHeaders(expectedItem);
         }
 
-    @Test(dataProvider = "Authentication", description = "searchTest")
+    @Test(dataProvider = "clubs", dataProviderClass = FootballClubs.class)
+    public void searchAndSortBySearchPopularity(String searchItem){
+        counter++;
+        SearchPage searchPage = new SearchPage(wd);
+        Integer quantity = searchPage.openSearchPage()
+                .doSearchOf(searchItem)
+                .getResultQuantityOfSearches();
+        hmap.put(searchItem, quantity);
+        if (FootballClubs.cities().length == counter){
+            this.after();
+        }
+    }
+
+    public void after(){
+        Map<String, Integer> u = hmap.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+                .collect(toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2,
+                        LinkedHashMap::new));
+        int y= 1;
+        for (Map.Entry entry : u.entrySet()) {
+            System.out.println(y + ": " + entry.getKey() + ", " + entry.getValue());
+            y++;
+        }
+    }
+
+    @Test(dataProvider = "searchPages", dataProviderClass = SearchPages.class)
     public void doGoogleSearch7(String volodya, String siteLinkVolodya){
         wd.get("https://www.google.com");
         wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(volodya);
@@ -110,23 +103,7 @@ public class GoogleSearchTest extends BaseTest{
         t.get(0).click();
     }
 
-
-    @DataProvider(name = "Cities")
-    public static Object[][] cities() {
-        return new Object[][] {
-                {"Boston" },
-                {"Tokyo"},
-                {"London"},
-                {"Washington"},
-                {"Los Angeles"},
-                {"Philadelphia"},
-                {"Jersey City"},
-                {"Berlin"},
-                {"Madrid"}
-        };
-    }
-
-    @Test(dataProvider = "Cities", description = "map verification")
+    @Test(dataProvider = "cities", dataProviderClass = Cities.class)
     public void doMapsSearch(String cities){
         String searchedItem = cities;
         wd.get("https://www.google.com");
@@ -143,15 +120,9 @@ public class GoogleSearchTest extends BaseTest{
         Assert.assertEquals(wd.findElement(By.cssSelector("div.section-hero-header-description > div:nth-child(1) > h1")).getText(), searchedItem);
     }
 
-    @DataProvider(name = "Destinations")
-    public static Object[][] destinations() {
-        return new Object[][] {
-                {"Journal Square", "Hoboken"},
-                {"Journal Square", "Times Square"}
-        };
-    }
 
-    @Test(dataProvider = "Destinations", description = "Provide search")
+
+    @Test(dataProvider = "Destinations", dataProviderClass = Destinations.class)
     public void doMapsSearch2(String from, String to) throws IOException {
         wd.get("https://www.google.com");
         wd.findElement(By.cssSelector("")).sendKeys("Google Maps");
