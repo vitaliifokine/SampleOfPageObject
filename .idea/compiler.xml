@@ -10,5 +10,8 @@
         <module name="SampleOfPageObject6" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="SampleOfPageObject" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>
