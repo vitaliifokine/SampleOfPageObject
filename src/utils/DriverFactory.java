@@ -11,7 +11,7 @@ public class DriverFactory {
     public static WebDriver wd;
 
     public static WebDriver setBrowser(String browser) {
-        System.setProperty("chromedriver.exe", "chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") + "\\drivers\\IEDriverServer.exe");
         System.setProperty("webdriver.edge.driver", System.getProperty("user.dir") + "\\drivers\\MicrosoftWebDriver.exe");
         if ("chrome".equalsIgnoreCase(browser)) {

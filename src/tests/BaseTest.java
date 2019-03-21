@@ -20,6 +20,7 @@ public class BaseTest extends DriverFactory {
     @BeforeTest
     public void setUp() {
     wd = DriverFactory.setBrowser("chrome");
+    wd.manage().window().maximize();
     wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 

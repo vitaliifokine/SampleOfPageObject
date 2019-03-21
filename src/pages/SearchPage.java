@@ -16,7 +16,7 @@ public class SearchPage extends BasePage {
     @FindBy(css = "div.a4bIc > input")
     private WebElement searchInput;
 
-    @FindBy(css = "#logo > img")
+    @FindBy(css = "#hdtb-msb-vis > div:nth-child(2) > a")
     private WebElement searchResultLogo;
 
     @FindBy(xpath = "//a[contains(text(), \"/Stadium\")]/../following-sibling::span/a")
@@ -27,7 +27,7 @@ public class SearchPage extends BasePage {
     }
 
     public SearchPage openSearchPage(){
-        wd.get("https://www.google.com");
+        wd.get("https://www.google.us");
         return this;
     }
 
