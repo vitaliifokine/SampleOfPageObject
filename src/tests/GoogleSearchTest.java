@@ -27,7 +27,14 @@ public class GoogleSearchTest extends BaseTest{
     public void doGoogleSearch(){
      SearchPage searchPage = new SearchPage(wd);
      searchPage.openSearchPage()
-             .doSearchOf("Last News");
+             .doSearchOf("Зеленский");
+    }
+
+    @Test
+    public void getButtonValidation(){
+        SearchPage searchPage = new SearchPage(wd);
+        String sample = searchPage.openSearchPage().getButtonNqame();
+        System.out.println(sample);
     }
 
     @Test
@@ -125,7 +132,7 @@ public class GoogleSearchTest extends BaseTest{
     @Test(dataProvider = "Destinations", dataProviderClass = Destinations.class)
     public void doMapsSearch2(String from, String to) throws IOException {
         wd.get("https://www.google.com");
-        wd.findElement(By.cssSelector("")).sendKeys("Google Maps");
+        wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys("Google Maps");
         wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(Keys.ENTER);
         WebDriverWait wait = new WebDriverWait(wd, 15);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#logo > img")));
@@ -134,12 +141,39 @@ public class GoogleSearchTest extends BaseTest{
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#searchboxinput")));
         wd.findElement(By.cssSelector("#searchbox-directions")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#sb_ifc51 > input")));
+        wd.findElement(By.cssSelector("#sb_ifc51 > input")).clear();
         wd.findElement(By.cssSelector("#sb_ifc51 > input")).sendKeys(from);
         wd.findElement(By.cssSelector("#sb_ifc52 > input")).sendKeys(to);
         wd.findElement(By.cssSelector("#sb_ifc52 > input")).sendKeys(Keys.ENTER);
         wd.findElement(By.cssSelector("div.directions-travel-mode-icon.directions-transit-icon")).click();
         WebElement webElements = wd.findElement(By.cssSelector("div.section-directions-trip-numbers > div"));
-        captureScreenshot();
+      //  captureScreenshot();
             System.out.println("Using public transportation Currently from location: "+from+" to location: "+to+" is: "+webElements.getText());
     }
+
+    @Test(dataProvider = "Destinations", dataProviderClass = Destinations.class)
+    public void doMapsSearch8(String from, String to) throws IOException, InterruptedException {
+        wd.get("https://www.google.com");
+        wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys("Google Maps");
+        wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(Keys.ENTER);
+        WebDriverWait wait = new WebDriverWait(wd, 15);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#logo > img")));
+        List<WebElement> t = wd.findElements(By.cssSelector("#search h3.LC20lb"));
+        t.get(0).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#searchboxinput")));
+        wd.findElement(By.cssSelector("#searchbox-directions")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#sb_ifc51 > input")));
+        wd.findElement(By.cssSelector("#sb_ifc51 > input")).clear();
+        wd.findElement(By.cssSelector("#sb_ifc51 > input")).sendKeys(from);
+        wd.findElement(By.cssSelector("#sb_ifc52 > input")).sendKeys(to);
+        wd.findElement(By.cssSelector("#sb_ifc52 > input")).sendKeys(Keys.ENTER);
+        Thread.sleep(4000);
+        wd.findElement(By.cssSelector("div.directions-travel-mode-icon.directions-drive-icon")).click();
+        WebElement webElements = wd.findElement(By.cssSelector("div.section-directions-trip-numbers > div"));
+      //  captureScreenshot();
+        System.out.println("Using public transportation Currently from location: "+from+" to location: "+to+" is: "+webElements.getText());
+    }
+
+
+
 }

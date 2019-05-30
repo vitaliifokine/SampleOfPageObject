@@ -58,9 +58,6 @@
                 <version>2.18.1</version>
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
-                    <argLine>
-                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                    </argLine>
                     <suiteXmlFiles>
                         <suiteXmlFile>${project.basedir}/suites/${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>

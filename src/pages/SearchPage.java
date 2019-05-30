@@ -16,6 +16,9 @@ public class SearchPage extends BasePage {
     @FindBy(css = "div.a4bIc > input")
     private WebElement searchInput;
 
+    @FindBy(css = ".FPdoLc input[name=\"btnK\"]")
+    private WebElement button;
+
     @FindBy(css = "#hdtb-msb-vis > div:nth-child(2) > a")
     private WebElement searchResultLogo;
 
@@ -42,6 +45,11 @@ public class SearchPage extends BasePage {
         searchInput.sendKeys(Keys.ENTER);
         waitUntilDisplayedBy(searchResultLogo);
         return new GoogleResultPage(wd);
+    }
+
+    public String getButtonNqame(){
+        waitUntilDisplayedBy(button);
+        return button.getAttribute("value");
     }
 
     public void doSearchAndCheckCoach(List<String> values){

@@ -6,7 +6,7 @@ public class Cities {
     @DataProvider(name = "cities")
     public static Object[][] cities() {
         return new Object[][] {
-                {"Boston" },
+                {"Донецк" },
                 {"Tokyo"},
                 {"London"},
                 {"Kyiv"},

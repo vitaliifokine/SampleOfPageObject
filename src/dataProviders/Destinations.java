@@ -7,8 +7,8 @@ public class Destinations {
     @DataProvider(name = "Destinations")
     public static Object[][] destinations() {
         return new Object[][] {
-                {"Journal Square", "Hoboken"},
-                {"Journal Square", "Times Square"}
+                {"Newark", "Hoboken"},
+                {"Brighton Beach", "Times Square"}
         };
     }
 }
