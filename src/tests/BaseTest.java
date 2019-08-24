@@ -1,9 +1,16 @@
 package tests;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import utils.DriverFactory;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest extends DriverFactory {
@@ -28,10 +35,10 @@ public class BaseTest extends DriverFactory {
         wd.quit();
     }
 
-//    public void captureScreenshot()throws IOException {
-//        String extension = ".png";
-//            File scrFile = ((TakesScreenshot)wd).getScreenshotAs(OutputType.FILE);
-//            String timestamp = new SimpleDateFormat("yyyy_MM_dd__hh_mm_ss").format(new Date());
-//            FileUtils.copyFile(scrFile, new File("./src/screenshots/" +timestamp+extension));
-//        }
+    public void captureScreenshot()throws IOException {
+        String extension = ".png";
+            File scrFile = ((TakesScreenshot)wd).getScreenshotAs(OutputType.FILE);
+            String timestamp = new SimpleDateFormat("yyyy_MM_dd__hh_mm_ss").format(new Date());
+            FileUtils.copyFile(scrFile, new File("./src/screenshots/" +timestamp+extension));
+        }
 }
