@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.Test;
 import pages.GoogleResultPage;
 import pages.SearchPage;
@@ -19,7 +20,7 @@ import java.util.*;
 
 import static java.util.stream.Collectors.toMap;
 
-public class GoogleSearchTest extends BaseTest{
+public class GoogleSearchTestIncapsulated extends BaseTest{
     Map<String, Integer> hmap = new HashMap<String, Integer>();
     int counter = 0;
 
@@ -108,6 +109,12 @@ public class GoogleSearchTest extends BaseTest{
         }
         Assert.assertEquals(t.get(0).getText(), siteLinkVolodya);
         t.get(0).click();
+    }
+
+    @Test()
+    public void dockerRun() throws IOException {
+        Runtime. getRuntime(). exec("cd C:\\Docker\\wordpress2");
+        Runtime. getRuntime(). exec("docker-compose up -d");
     }
 
     @Test(dataProvider = "cities", dataProviderClass = Cities.class)
