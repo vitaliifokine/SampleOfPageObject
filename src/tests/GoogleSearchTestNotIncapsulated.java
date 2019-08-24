@@ -177,7 +177,7 @@ public class GoogleSearchTestNotIncapsulated extends BaseTest{
 //
 
     @Test()
-    public void wordPressTest(String from, String to) throws IOException, InterruptedException {
+    public void wordPressTest() throws IOException, InterruptedException {
         wd.get("http://localhost:8000/");
         WebDriverWait wait = new WebDriverWait(wd, 15);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#masthead > div > div > h1 > a")));
