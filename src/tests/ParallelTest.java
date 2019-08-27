@@ -19,7 +19,7 @@ public class ParallelTest extends BaseTest {
         System.out.println("Simple test-method One. Thread id is: " + id);
     }
 
-        @Test
+        @Test(testName = "sample")
         public void testMethodsTwo() {
         long id = Thread.currentThread().getId();
         System.out.println("Simple test-method Two. Thread id is: " + id);
