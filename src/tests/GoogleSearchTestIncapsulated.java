@@ -31,14 +31,14 @@ public class GoogleSearchTestIncapsulated extends BaseTest{
              .doSearchOf("Зеленский");
     }
 
-    @Test
+    @Test(testName = "Test Sample")
     public void getButtonValidation(){
         SearchPage searchPage = new SearchPage(wd);
         String sample = searchPage.openSearchPage().getButtonNqame();
         System.out.println(sample);
     }
 
-    @Test
+    @Test(testName = "Test Sample")
     public void doGoogleSearchWithAnotherInput(){
         SearchPage searchPage = new SearchPage(wd);
         searchPage.openSearchPage()

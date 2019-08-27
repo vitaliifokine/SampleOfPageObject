@@ -17,7 +17,6 @@ import pages.SearchPage;
 import java.io.IOException;
 import java.util.*;
 
-import static java.util.stream.Collectors.toMap;
 
 public class GoogleSearchTestNotIncapsulated extends BaseTest{
 //    Map<String, Integer> hmap = new HashMap<String, Integer>();
