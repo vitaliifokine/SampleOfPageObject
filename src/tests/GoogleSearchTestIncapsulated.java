@@ -1,24 +1,10 @@
 package tests;
 
-import dataProviders.Cities;
-import dataProviders.Destinations;
-import dataProviders.FootballClubs;
-import dataProviders.SearchPages;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.Test;
 import pages.GoogleResultPage;
 import pages.SearchPage;
 
-import java.io.IOException;
-import java.util.*;
-
-import static java.util.stream.Collectors.toMap;
 
 public class GoogleSearchTestIncapsulated extends BaseTest{
 //    Map<String, Integer> hmap = new HashMap<String, Integer>();
