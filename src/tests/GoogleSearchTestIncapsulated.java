@@ -24,45 +24,45 @@ public class GoogleSearchTestIncapsulated extends BaseTest{
 //    Map<String, Integer> hmap = new HashMap<String, Integer>();
 //    int counter = 0;
 //
-//    @Test
-//    public void doGoogleSearch(){
-//     SearchPage searchPage = new SearchPage(wd);
-//     searchPage.openSearchPage()
-//             .doSearchOf("Зеленский");
-//    }
-//
-//    @Test
-//    public void getButtonValidation(){
-//        SearchPage searchPage = new SearchPage(wd);
-//        String sample = searchPage.openSearchPage().getButtonNqame();
-//        System.out.println(sample);
-//    }
-//
-//    @Test
-//    public void doGoogleSearchWithAnotherInput(){
-//        SearchPage searchPage = new SearchPage(wd);
-//        searchPage.openSearchPage()
-//                .doSearchOf("NBA starting date");
-//        GoogleResultPage resultPage = new GoogleResultPage(wd);
-//        Assert.assertEquals(resultPage.getFirstHeaderFromSearchPage(),
-//                "Key dates for 2018-19 NBA season | NBA.com");
-//    }
-//
-//    @Test()
-//    public void searchAndOpenFirstLink(){
-//        SearchPage searchPage = new SearchPage(wd);
-//        searchPage.openSearchPage()
-//                .doSearchOf("LinkedIn")
-//                .openFirstGoogleLink();
-//    }
-//
-//    @Test
-//    public void printGoogleHeaders(){
-//        SearchPage searchPage = new SearchPage(wd);
-//        searchPage.openSearchPage()
-//                .doSearchOf("LinkedIn")
-//                .printTitlesInConsole();
-//    }
+    @Test
+    public void doGoogleSearch(){
+     SearchPage searchPage = new SearchPage(wd);
+     searchPage.openSearchPage()
+             .doSearchOf("Зеленский");
+    }
+
+    @Test
+    public void getButtonValidation(){
+        SearchPage searchPage = new SearchPage(wd);
+        String sample = searchPage.openSearchPage().getButtonNqame();
+        System.out.println(sample);
+    }
+
+    @Test
+    public void doGoogleSearchWithAnotherInput(){
+        SearchPage searchPage = new SearchPage(wd);
+        searchPage.openSearchPage()
+                .doSearchOf("NBA starting date");
+        GoogleResultPage resultPage = new GoogleResultPage(wd);
+        Assert.assertEquals(resultPage.getFirstHeaderFromSearchPage(),
+                "Key dates for 2018-19 NBA season | NBA.com");
+    }
+
+    @Test()
+    public void searchAndOpenFirstLink(){
+        SearchPage searchPage = new SearchPage(wd);
+        searchPage.openSearchPage()
+                .doSearchOf("LinkedIn")
+                .openFirstGoogleLink();
+    }
+
+    @Test
+    public void printGoogleHeaders(){
+        SearchPage searchPage = new SearchPage(wd);
+        searchPage.openSearchPage()
+                .doSearchOf("LinkedIn")
+                .printTitlesInConsole();
+    }
 //
 //    @Test(dataProvider = "searchPages", dataProviderClass = SearchPages.class)
 //        public void validateGoogleSearchHeaders(String searchItem, String expectedItem){
