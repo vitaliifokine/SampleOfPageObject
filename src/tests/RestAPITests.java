@@ -32,7 +32,7 @@ public class RestAPITests {
     public void sampleTest() {
         RestAssured.baseURI = "http://api.nobelprize.org";
         RequestSpecification httpRequest = RestAssured.given();
-        Response response = httpRequest.get("/v1/laureate.json");
+        Response response = httpRequest.get("/v1/laureate.json"); 
         JsonPath jsonPathEvaluator = response.jsonPath();
         List<String> firstNamesOfAllLaureates = jsonPathEvaluator.getList("laureates.firstname");
         List<String> lastNamesOfAllLaureates = jsonPathEvaluator.getList("laureates.surname");
