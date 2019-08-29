@@ -4,7 +4,6 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterTest;
@@ -48,13 +47,14 @@ public class BaseTest extends DriverFactory {
         DesiredCapabilities desiredCapabilities = DesiredCapabilities.chrome();
 //        desiredCapabilities.setBrowserName("chrome");
 //        desiredCapabilities.setPlatform(Platform.LINUX);
-        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+      //  System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
       //  ChromeOptions desiredCapabilities = new ChromeOptions();
-        desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+      //  desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
      //   WebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/grid/console"), desiredCapabilities);
         WebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), desiredCapabilities);
       //  WebDriver driver = new RemoteWebDriver(new URL("http://172.17.0.4:4444/grid/register"), desiredCapabilities);
         driver.get("https://www.guru99.com");
+        driver.quit();
 
 
     }

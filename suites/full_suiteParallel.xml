@@ -3,9 +3,8 @@
 <suite name="example suite 1" verbose="1" parallel="classes">
     <test name="Regression suite 1" >
         <classes>
-            <class name="tests.GoogleSearchTestNotIncapsulated"/>
-            <class name="tests.ParallelTest" />
-            <class name="tests.GoogleSearchTestIncapsulated"/>
+            <class name="tests.ParallelTest"/>
+            <class name="tests.BaseTest" />
         </classes>
     </test>
 </suite>
