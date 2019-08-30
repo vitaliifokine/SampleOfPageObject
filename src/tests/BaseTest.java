@@ -37,7 +37,7 @@ public class BaseTest extends DriverFactory {
 //    }
 
     @Test()
-    public void dockerSeleniumHub() throws MalformedURLException {
+    public void dockerSeleniumHub() throws IOException {
         // DockerHub
 //        Use below commands to run Grid:
 //        $ docker run -d -p 4444:4444 --name selenium-hub selenium/hub:3.4.0
