@@ -52,40 +52,9 @@ public class ParallelTest extends BaseTest {
 //
 //        Node Start Command with Chrome Driver Location: java -jar -Dwebdriver.chrome.driver=C:\Users\Julia_Kolesnyk\IdeaProjects\SampleOfPageObject2\chromedriver.exe selenium-server-standalone-3.141.59.jar -role node -hub http://localhost:4444/grid/register
         try {
-            Runtime.getRuntime().exec("TASKKILL /IM chromedriver.exe /F");
-            System.setProperty("webdriver.chrome.driver", "C:\\Users\\Julia_Kolesnyk\\IdeaProjects\\SampleOfPageObject2\\chromedriver.exe");
-            DesiredCapabilities cap = new DesiredCapabilities();
-            cap.setBrowserName("chrome");
-            cap.setVersion("");
-            cap.setPlatform(Platform.WIN10);
-            ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.addArguments("test-type");
-            chromeOptions.addArguments("--disable-extensions");
-            chromeOptions.addArguments("--no-sandbox");
-            chromeOptions.merge(cap);
-            WebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions);
-            driver.get("https://www.guru99.com");
-            driver.quit();
-            System.out.println("V1");
-            Runtime.getRuntime().exec("TASKKILL /IM chromedriver.exe /F");
+           executeGrid();
         } catch (SessionNotCreatedException sessionNotCreatedException){
-            Runtime.getRuntime().exec("TASKKILL /IM chromedriver.exe /F");
-            System.setProperty("webdriver.chrome.driver", "C:\\Users\\Julia_Kolesnyk\\IdeaProjects\\SampleOfPageObject2\\chromedriver.exe");
-            DesiredCapabilities cap = new DesiredCapabilities();
-            cap.setBrowserName("chrome");
-            cap.setVersion("");
-            cap.setPlatform(Platform.WIN10);
-            ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.addArguments("test-type");
-            chromeOptions.addArguments("--disable-extensions");
-            chromeOptions.addArguments("--no-sandbox");
-            chromeOptions.merge(cap);
-            WebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions);
-            driver.get("https://www.guru99.com");
-            driver.quit();
-            Runtime.getRuntime().exec("TASKKILL /IM chromedriver.exe /F");
-            System.out.println("V2");
-
+            executeGrid();
         }
     }
 
@@ -103,9 +72,27 @@ public class ParallelTest extends BaseTest {
         // driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(45, TimeUnit.SECONDS);
-
         driver.get("https://www.google.co.in/");
 
+    }
+
+    private void executeGrid() throws IOException {
+        Runtime.getRuntime().exec("TASKKILL /IM chromedriver.exe /F");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Julia_Kolesnyk\\IdeaProjects\\SampleOfPageObject2\\chromedriver.exe");
+        DesiredCapabilities cap = new DesiredCapabilities();
+        cap.setBrowserName("chrome");
+        cap.setVersion("");
+        cap.setPlatform(Platform.WIN10);
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("test-type");
+        chromeOptions.addArguments("--disable-extensions");
+        chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.merge(cap);
+        WebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions);
+        driver.get("https://www.guru99.com");
+        driver.quit();
+        Runtime.getRuntime().exec("TASKKILL /IM chromedriver.exe /F");
+        System.out.println("V2");
     }
 
     // Only for API - not Selenium
