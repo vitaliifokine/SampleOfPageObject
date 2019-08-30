@@ -61,7 +61,7 @@ public class BaseTest extends DriverFactory {
 
     @AfterTest
     public void quit() {
-        wd.quit();
+
     }
 
     public void captureScreenshot()throws IOException {
