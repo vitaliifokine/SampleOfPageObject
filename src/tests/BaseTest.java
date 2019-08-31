@@ -1,9 +1,8 @@
 package tests;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterTest;
@@ -38,27 +37,30 @@ public class BaseTest extends DriverFactory {
 
     @Test()
     public void dockerSeleniumHub() throws IOException {
-        // DockerHub
-//        Use below commands to run Grid:
-//        $ docker run -d -p 4444:4444 --name selenium-hub selenium/hub:3.4.0
-//        $ docker run -d --link selenium-hub:hub selenium/node-chrome:3.4.0
-//        $ docker run -d --link selenium-hub:hub selenium/node-firefox:3.4.0
-
-        DesiredCapabilities desiredCapabilities = DesiredCapabilities.chrome();
-//        desiredCapabilities.setBrowserName("chrome");
-//        desiredCapabilities.setPlatform(Platform.LINUX);
-      //  System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-      //  ChromeOptions desiredCapabilities = new ChromeOptions();
-      //  desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-     //   WebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/grid/console"), desiredCapabilities);
-        WebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), desiredCapabilities);
-      //  WebDriver driver = new RemoteWebDriver(new URL("http://172.17.0.4:4444/grid/register"), desiredCapabilities);
-        driver.get("https://www.guru99.com");
-        driver.quit();
-
-
+        try {
+            executeGrid();
+        } catch (SessionNotCreatedException sessionNotCreatedException){
+            }
     }
 
+    private void executeGrid() throws IOException {
+       // Runtime.getRuntime().exec("TASKKILL /IM chromedriver.exe /F");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Julia_Kolesnyk\\IdeaProjects\\SampleOfPageObject2\\chromedriver.exe");
+        DesiredCapabilities cap = new DesiredCapabilities();
+        cap.setBrowserName("chrome");
+        cap.setVersion("");
+        cap.setPlatform(Platform.WIN10);
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("test-type");
+        chromeOptions.addArguments("--disable-extensions");
+        chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.merge(cap);
+        WebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions);
+        driver.get("https://www.guru99.com");
+        driver.quit();
+        Runtime.getRuntime().exec("TASKKILL /IM chromedriver.exe /F");
+        System.out.println("V2");
+    }
     @AfterTest
     public void quit() {
 
