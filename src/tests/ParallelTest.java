@@ -49,11 +49,7 @@ public class ParallelTest extends BaseTest {
 //                > java -jar selenium-server-standalone-3.141.59.jar -role node -hub http://localhost:4444/grid/register
 //
 //        Node Start Command with Chrome Driver Location: java -jar -Dwebdriver.chrome.driver=C:\Users\Julia_Kolesnyk\IdeaProjects\SampleOfPageObject2\chromedriver.exe selenium-server-standalone-3.141.59.jar -role node -hub http://localhost:4444/grid/register
-        try {
            executeGrid("https://stackoverflow.com");
-        } catch (SessionNotCreatedException sessionNotCreatedException){
-            executeGrid("https://stackoverflow.com");
-        }
     }
 
 

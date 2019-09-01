@@ -37,11 +37,11 @@ public class BaseTest extends DriverFactory {
 
     @Test()
     public void dockerSeleniumHub() throws IOException {
-        try {
+//        try {
             executeGrid();
-        } catch (SessionNotCreatedException sessionNotCreatedException){
-            executeGrid();
-            }
+//        } catch (SessionNotCreatedException sessionNotCreatedException){
+//            executeGrid();
+//            }
     }
 
     private void executeGrid() throws IOException {
