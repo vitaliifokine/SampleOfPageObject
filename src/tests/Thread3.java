@@ -28,8 +28,8 @@ public class Thread3 extends BaseTest {
     }
 
     private void executeGrid(String grid) throws IOException {
-        // Runtime.getRuntime().exec("TASKKILL /IM chromedriver.exe /F");
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Julia_Kolesnyk\\IdeaProjects\\SampleOfPageObject2\\chromedriver.exe");
+        Runtime.getRuntime().exec("TASKKILL /IM chromedriver.exe /F");
+        // System.setProperty("webdriver.chrome.driver", "C:\\Users\\Julia_Kolesnyk\\IdeaProjects\\SampleOfPageObject2\\chromedriver.exe");
         DesiredCapabilities cap = new DesiredCapabilities();
         cap.setBrowserName("chrome");
         cap.setVersion("");
@@ -43,7 +43,9 @@ public class Thread3 extends BaseTest {
         driver.get(grid);
         driver.quit();
         Runtime.getRuntime().exec("TASKKILL /IM chromedriver.exe /F");
-        System.out.println("V2");
+        System.out.println("V3");
+        System.out.println("Test Case One with Thread Id:- "
+                + Thread.currentThread().getId());
     }
 
 }

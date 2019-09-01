@@ -50,9 +50,9 @@ public class ParallelTest extends BaseTest {
 //
 //        Node Start Command with Chrome Driver Location: java -jar -Dwebdriver.chrome.driver=C:\Users\Julia_Kolesnyk\IdeaProjects\SampleOfPageObject2\chromedriver.exe selenium-server-standalone-3.141.59.jar -role node -hub http://localhost:4444/grid/register
         try {
-           executeGrid("https://www.guru99.com");
+           executeGrid("https://stackoverflow.com");
         } catch (SessionNotCreatedException sessionNotCreatedException){
-            executeGrid("https://www.guru99.com");
+            executeGrid("https://stackoverflow.com");
         }
     }
 
@@ -91,6 +91,8 @@ public class ParallelTest extends BaseTest {
         driver.quit();
         Runtime.getRuntime().exec("TASKKILL /IM chromedriver.exe /F");
         System.out.println("V2");
+        System.out.println("Test Case One with Thread Id:- "
+                + Thread.currentThread().getId());
     }
 
     // Only for API - not Selenium

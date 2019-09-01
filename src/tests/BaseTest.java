@@ -40,12 +40,13 @@ public class BaseTest extends DriverFactory {
         try {
             executeGrid();
         } catch (SessionNotCreatedException sessionNotCreatedException){
+            executeGrid();
             }
     }
 
     private void executeGrid() throws IOException {
-       // Runtime.getRuntime().exec("TASKKILL /IM chromedriver.exe /F");
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Julia_Kolesnyk\\IdeaProjects\\SampleOfPageObject2\\chromedriver.exe");
+       Runtime.getRuntime().exec("TASKKILL /IM chromedriver.exe /F");
+        // System.setProperty("webdriver.chrome.driver", "C:\\Users\\Julia_Kolesnyk\\IdeaProjects\\SampleOfPageObject2\\chromedriver.exe");
         DesiredCapabilities cap = new DesiredCapabilities();
         cap.setBrowserName("chrome");
         cap.setVersion("");
@@ -59,7 +60,9 @@ public class BaseTest extends DriverFactory {
         driver.get("https://www.guru99.com");
         driver.quit();
         Runtime.getRuntime().exec("TASKKILL /IM chromedriver.exe /F");
-        System.out.println("V2");
+        System.out.println("V1");
+        System.out.println("Test Case One with Thread Id:- "
+                + Thread.currentThread().getId());
     }
     @AfterTest
     public void quit() {
