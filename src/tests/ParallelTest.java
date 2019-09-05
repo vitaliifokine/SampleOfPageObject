@@ -53,6 +53,24 @@ public class ParallelTest extends BaseTest {
            executeGrid("https://stackoverflow.com");
     }
 
+    @Test()
+    public void dockerSeleniumHub3() throws IOException {
+//        >java -jar selenium-server-standalone-3.141.59.jar -role hub
+//                > java -jar selenium-server-standalone-3.141.59.jar -role node -hub http://localhost:4444/grid/register
+//
+//        Node Start Command with Chrome Driver Location: java -jar -Dwebdriver.chrome.driver=C:\Users\Julia_Kolesnyk\IdeaProjects\SampleOfPageObject2\chromedriver.exe selenium-server-standalone-3.141.59.jar -role node -hub http://localhost:4444/grid/register
+        executeGrid("https://stackoverflow.com");
+    }
+
+    @Test()
+    public void dockerSeleniumHub4() throws IOException {
+//        >java -jar selenium-server-standalone-3.141.59.jar -role hub
+//                > java -jar selenium-server-standalone-3.141.59.jar -role node -hub http://localhost:4444/grid/register
+//
+//        Node Start Command with Chrome Driver Location: java -jar -Dwebdriver.chrome.driver=C:\Users\Julia_Kolesnyk\IdeaProjects\SampleOfPageObject2\chromedriver.exe selenium-server-standalone-3.141.59.jar -role node -hub http://localhost:4444/grid/register
+        executeGrid("https://stackoverflow.com");
+    }
+
 
 //    @Test()
 //    public void dockerSeleniumHub2() throws MalformedURLException {
