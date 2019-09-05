@@ -1,15 +1,16 @@
 package tests;
 
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.SessionNotCreatedException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 
 public class ParallelTest extends BaseTest {
 
@@ -72,20 +73,28 @@ public class ParallelTest extends BaseTest {
 
     private void executeGrid(String grid) throws IOException {
        // Runtime.getRuntime().exec("TASKKILL /IM chromedriver.exe /F");
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Julia_Kolesnyk\\IdeaProjects\\SampleOfPageObject2\\chromedriver.exe");
+       // System.setProperty("webdriver.chrome.driver", "C:\\Users\\Julia_Kolesnyk\\IdeaProjects\\SampleOfPageObject2\\chromedriver");
         DesiredCapabilities cap = new DesiredCapabilities();
         cap.setBrowserName("chrome");
         cap.setVersion("");
-        cap.setPlatform(Platform.WIN10);
+        cap.setPlatform(Platform.LINUX);
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("test-type");
         chromeOptions.addArguments("--disable-extensions");
         chromeOptions.addArguments("--no-sandbox");
         chromeOptions.merge(cap);
-        WebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions);
+        WebDriver driver = new RemoteWebDriver(new URL("http://192.168.221.33:4444/wd/hub"), chromeOptions);
         driver.get(grid);
+        String searchedItem = "Kyiv";
+        driver.get("https://www.google.com");
+        driver.findElement(By.cssSelector("div.a4bIc > input")).sendKeys("Google Maps");
+        driver.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(Keys.ENTER);
+        WebDriverWait wait = new WebDriverWait(driver, 15);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#logo > img")));
+//        List<WebElement> t = wd.findElements(By.cssSelector("#search h3.LC20lb"));
+//        t.get(0).click();
         driver.quit();
-        Runtime.getRuntime().exec("TASKKILL /IM chromedriver.exe /F");
+       // Runtime.getRuntime().exec("TASKKILL /IM chromedriver.exe /F");
         System.out.println("V2");
         System.out.println("Test Case One with Thread Id:- "
                 + Thread.currentThread().getId());
