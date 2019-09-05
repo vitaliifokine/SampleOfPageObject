@@ -182,7 +182,7 @@ public class GoogleSearchTestNotIncapsulated extends BaseTest{
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#masthead > div > div > h1 > a")));
         String text = wd.findElement(By.cssSelector("#masthead > div > div > h1 > a")).getText();
         System.out.println(text);
-        captureScreenshot();
+        captureScreenshot(wd);
     }
 
 }

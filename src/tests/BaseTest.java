@@ -1,5 +1,6 @@
 package tests;
 
+import net.bytebuddy.utility.RandomString;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -16,12 +17,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class BaseTest extends DriverFactory {
     @BeforeTest
     public void setUp() throws MalformedURLException {
         // Driver Factory Setup
-//    wd = DriverFactory.setBrowser("chrome");
+    wd = DriverFactory.setBrowser("remote");
 //    wd.manage().window().maximize();
 //    wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
@@ -35,13 +37,12 @@ public class BaseTest extends DriverFactory {
 //        }
 //    }
 
+
+
     @Test()
     public void dockerSeleniumHub() throws IOException {
-//        try {
-            executeGrid();
-//        } catch (SessionNotCreatedException sessionNotCreatedException){
-//            executeGrid();
-//            }
+        wd.get("https://www.guru99.com");
+        captureScreenshot(wd);
     }
 
     private void executeGrid() throws IOException {
@@ -69,11 +70,12 @@ public class BaseTest extends DriverFactory {
 
     }
 
-    public void captureScreenshot()throws IOException {
+    public void captureScreenshot(WebDriver driver)throws IOException {
         String extension = ".png";
-            File scrFile = ((TakesScreenshot)wd).getScreenshotAs(OutputType.FILE);
-            String timestamp = new SimpleDateFormat("yyyy_MM_dd__hh_mm_ss").format(new Date());
-            FileUtils.copyFile(scrFile, new File("./src/screenshots/" +timestamp+extension));
+            File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+            String timestamp =  RandomString.make(4);
+            String date =  new SimpleDateFormat("yyyy_MM_dd__hh_mm_ss").format(new Date());
+            FileUtils.copyFile(scrFile, new File("./src/screenshots/" +date + timestamp+extension));
         }
 
 

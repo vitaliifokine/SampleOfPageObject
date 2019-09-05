@@ -104,11 +104,13 @@ public class ParallelTest extends BaseTest {
         WebDriver driver = new RemoteWebDriver(new URL("http://192.168.221.33:4444/wd/hub"), chromeOptions);
         driver.get(grid);
         String searchedItem = "Kyiv";
+        driver.manage().window().maximize();
         driver.get("https://www.google.com");
         driver.findElement(By.cssSelector("div.a4bIc > input")).sendKeys("Google Maps");
         driver.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(Keys.ENTER);
         WebDriverWait wait = new WebDriverWait(driver, 15);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#logo > img")));
+        captureScreenshot(driver);
 //        List<WebElement> t = wd.findElements(By.cssSelector("#search h3.LC20lb"));
 //        t.get(0).click();
         driver.quit();
