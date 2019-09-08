@@ -56,9 +56,6 @@
             <artifactId>selenium-java</artifactId>
             <version>3.141.59</version>
         </dependency>
-
-
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -69,6 +66,11 @@
             <groupId>com.codeborne</groupId>
             <artifactId>selenide</artifactId>
             <version>4.14.1</version>
+        </dependency>
+        <dependency>
+            <groupId>ru.yandex.qatools.ashot</groupId>
+            <artifactId>ashot</artifactId>
+            <version>1.5.4</version>
         </dependency>
         <dependency>
             <groupId>io.rest-assured</groupId>
@@ -103,8 +105,16 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>${project.basedir}/suites/${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
                 </configuration>
                 <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
                 </dependencies>
             </plugin>
             <plugin>
