@@ -1,9 +1,11 @@
 package tests;
 
+import io.qameta.allure.Attachment;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Step;
 import net.bytebuddy.utility.RandomString;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
-import io.qameta.allure.*;
 import org.testng.annotations.*;
 import utils.DriverFactory;
 
