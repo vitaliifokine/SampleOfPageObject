@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Feature;
 import org.testng.annotations.Test;
 import pages.BasePage;
 
@@ -26,7 +27,8 @@ public class SampleTest extends BaseTest {
     }
 
 
-    @Test()
+    @Feature("Sample")
+    @Test(description = "Test")
     public void testUnitedNations() throws IOException {
         wd.get("https://www.un.org/en/");
         captureScreenshot(wd);

@@ -23,6 +23,7 @@ public class BaseTest extends DriverFactory {
         wd.manage().window().maximize();
     }
 
+    @Feature("Docker")
     @Test()
     public void dockerSeleniumHub() throws IOException {
         wd.manage().window().maximize();
@@ -30,7 +31,8 @@ public class BaseTest extends DriverFactory {
         captureScreenshot(wd);
     }
 
-    @Test()
+    @Feature("Docker")
+    @Test(description = "Docker test")
     public void dockerSeleniumHub6() throws IOException {
         wd.manage().window().maximize();
         wd.get("https://en.wikipedia.org/wiki/Wiki");
@@ -74,13 +76,13 @@ public class BaseTest extends DriverFactory {
         return ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
     }
 
-    @AfterMethod
-    @Attachment
-    public void takeScreenShotOnFailure(ITestResult testResult) throws IOException {
-        if (testResult.getStatus() == ITestResult.SUCCESS) {
-            File scrFile = ((TakesScreenshot)wd).getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(scrFile, new File("./src/screenshots/" + testResult.getName() + "-"
-                    + Arrays.toString(testResult.getParameters()) +  ".jpg"));
-        }
-    }
+//    @AfterMethod
+//    @Attachment
+//    public void takeScreenShotOnFailure(ITestResult testResult) throws IOException {
+//        if (testResult.getStatus() == ITestResult.SUCCESS) {
+//            File scrFile = ((TakesScreenshot)wd).getScreenshotAs(OutputType.FILE);
+//            FileUtils.copyFile(scrFile, new File("./src/screenshots/" + testResult.getName() + "-"
+//                    + Arrays.toString(testResult.getParameters()) +  ".jpg"));
+//        }
+//    }
 }
