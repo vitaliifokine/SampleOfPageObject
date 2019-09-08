@@ -4,7 +4,6 @@ import net.bytebuddy.utility.RandomString;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import io.qameta.allure.*;
-import org.testng.ITestResult;
 import org.testng.annotations.*;
 import utils.DriverFactory;
 
@@ -12,7 +11,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 
 public class BaseTest extends DriverFactory {
