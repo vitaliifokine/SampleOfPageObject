@@ -8,11 +8,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="SampleOfPageObject259" />
         <module name="SampleOfPageObject6" />
-        <module name="SampleOfPageObject1008" />
         <module name="SampleOfPageObject2" />
         <module name="SampleOfPageObject1" />
         <module name="SampleOfPageObject" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="SampleOfPageObject1008" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
