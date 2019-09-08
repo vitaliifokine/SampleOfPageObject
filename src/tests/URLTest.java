@@ -19,7 +19,7 @@ import java.util.Date;
 public class URLTest extends BaseTest {
 
     @Test()
-    public void dockerSeleniumHub() throws IOException {
+    public void testWiki() throws IOException {
         wd.manage().window().maximize();
         wd.get("https://www.guru99.com");
         captureScreenshot(wd);
