@@ -69,6 +69,12 @@ public class BaseTest extends DriverFactory {
         FileUtils.copyFile(scrFile, new File("./src/screenshots/" + date + timestamp + extension));
     }
 
+    @Attachment(value = "Page screenshot", type = "image/png")
+    public byte[] saveScreenshot() {
+        byte[] screenshot = ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
+        return screenshot;
+    }
+
     @AfterMethod
     @Attachment
     public void takeScreenShotOnFailure(ITestResult testResult) throws IOException {

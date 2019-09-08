@@ -33,5 +33,6 @@ public class SampleTest extends BaseTest {
         wd.manage().window().maximize();
         wd.get("https://www.un.org/en/");
         captureScreenshot(wd);
+        saveScreenshot();
     }
 }
