@@ -19,7 +19,7 @@ public class SampleTest extends BaseTest {
         captureScreenshot(wd);
     }
 
-    @Test()
+    @Test(description = "Check Cucumber")
     public void testCucumber() throws IOException {
         new BasePage(wd).openWebPage("https://cucumber.io/docs/guides/10-minute-tutorial/");
         captureScreenshot(wd);

@@ -71,8 +71,7 @@ public class BaseTest extends DriverFactory {
 
     @Attachment(value = "Page screenshot", type = "image/png")
     public byte[] saveScreenshot() {
-        byte[] screenshot = ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
-        return screenshot;
+        return ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
     }
 
     @AfterMethod
@@ -84,12 +83,4 @@ public class BaseTest extends DriverFactory {
                     + Arrays.toString(testResult.getParameters()) +  ".jpg"));
         }
     }
-
-//    @Step("Sub-step with attachment File")
-//    @Attachment
-//    private byte[] subStepWithAttachment() throws IOException {
-//        return Files.readAllBytes(
-//                new File(getClass().getClassLoader().getResource("images/totally-open-source-kitten.jpeg").getFile()).toPath()
-//        );
-//    }
 }

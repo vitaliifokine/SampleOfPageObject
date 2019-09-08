@@ -2,6 +2,7 @@ package pages;
 
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -10,6 +11,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.DriverFactory;
+
+import java.io.File;
+import java.util.Arrays;
 
 public class BasePage extends DriverFactory {
     public BasePage(WebDriver driver) {
