@@ -71,6 +71,7 @@ public class BaseTest extends DriverFactory {
         FileUtils.copyFile(scrFile, new File("./src/screenshots/" + date + timestamp + extension));
     }
 
+    @Step("Save attachment")
     @Attachment(value = "Page screenshot", type = "image/png")
     public byte[] saveScreenshot() {
         return ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
