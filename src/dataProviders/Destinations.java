@@ -8,7 +8,9 @@ public class Destinations {
     public static Object[][] destinations() {
         return new Object[][] {
                 {"Newark", "Hoboken"},
-                {"Brighton Beach", "Times Square"}
+                {"Newport", "Times Square"},
+                {"San Francisco", "San Jose"},
+                {"Boston", "New York"}
         };
     }
 }
