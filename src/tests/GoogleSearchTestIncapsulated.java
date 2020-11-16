@@ -28,7 +28,7 @@ public class GoogleSearchTestIncapsulated extends BaseTest{
     public void doGoogleSearch(){
      SearchPage searchPage = new SearchPage(wd);
      searchPage.openSearchPage()
-             .doSearchOf("Зеленский");
+             .doSearchOf("USA");
     }
 
     @Test(testName = "Test Sample")
@@ -139,9 +139,7 @@ public class GoogleSearchTestIncapsulated extends BaseTest{
     // TODO Remove all bad practices: thread sleeps, move to page object
     @Test(dataProvider = "Destinations", dataProviderClass = Destinations.class)
     public void doMapsSearch2(String from, String to) throws IOException, InterruptedException {
-        wd.get("https://www.google.com");
-        wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys("Google Maps");
-        wd.findElement(By.cssSelector("div.a4bIc > input")).sendKeys(Keys.ENTER);
+        search("Google Maps");
         WebDriverWait wait = new WebDriverWait(wd, 15);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#logo > img")));
         List<WebElement> t = wd.findElements(By.cssSelector("#search h3.LC20lb"));
@@ -183,6 +181,12 @@ public class GoogleSearchTestIncapsulated extends BaseTest{
         WebElement webElements = wd.findElement(By.cssSelector("div.section-directions-trip-numbers > div"));
       //  captureScreenshot();
         System.out.println("Using public transportation Currently from location: "+from+" to location: "+to+" is: "+webElements.getText());
+    }
+    
+    private void search(String searchWord){
+        SearchPage searchPage = new SearchPage(wd);
+        searchPage.openSearchPage()
+                .doSearchOf(searchWord);
     }
 
 
