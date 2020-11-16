@@ -182,7 +182,7 @@ public class GoogleSearchTestIncapsulated extends BaseTest{
       //  captureScreenshot();
         System.out.println("Using public transportation Currently from location: "+from+" to location: "+to+" is: "+webElements.getText());
     }
-    
+
     private void search(String searchWord){
         SearchPage searchPage = new SearchPage(wd);
         searchPage.openSearchPage()
