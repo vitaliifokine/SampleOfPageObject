@@ -1,8 +1,11 @@
 package tests;
 
+import io.qameta.allure.Attachment;
+import io.qameta.allure.Step;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import utils.DriverFactory;
@@ -30,15 +33,20 @@ public class BaseTest extends DriverFactory {
 //        }
 //    }
 
+    @Step("Make a screenshot")
+    @Attachment
+    public byte[] captureScreenshot(WebDriver driver) throws IOException {
+        return ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
+    }
+
     @AfterTest
     public void quit() {
         wd.quit();
     }
 
-    public void captureScreenshot()throws IOException {
-        String extension = ".png";
-            File scrFile = ((TakesScreenshot)wd).getScreenshotAs(OutputType.FILE);
-            String timestamp = new SimpleDateFormat("yyyy_MM_dd__hh_mm_ss").format(new Date());
-            FileUtils.copyFile(scrFile, new File("./src/screenshots/" +timestamp+extension));
+    @Step("Make a screenshot")
+    @Attachment
+    public byte[] captureScreenshot()throws IOException {
+        return ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
         }
 }

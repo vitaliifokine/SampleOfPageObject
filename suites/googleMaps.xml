@@ -5,7 +5,7 @@
         <classes>
             <class name="tests.GoogleSearchTestIncapsulated">
             <methods>
-            <include name="doMapsSearch2" />
+            <include name="doGoogleMapsSearch"/>
             </methods>
             </class>
         </classes>

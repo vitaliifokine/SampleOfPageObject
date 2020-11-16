@@ -138,7 +138,7 @@ public class GoogleSearchTestIncapsulated extends BaseTest{
 
     // TODO Remove all bad practices: thread sleeps, move to page object
     @Test(dataProvider = "Destinations", dataProviderClass = Destinations.class)
-    public void doMapsSearch2(String from, String to) throws IOException, InterruptedException {
+    public void doGoogleMapsSearch(String from, String to) throws IOException, InterruptedException {
         search("Google Maps");
         WebDriverWait wait = new WebDriverWait(wd, 15);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#logo > img")));
