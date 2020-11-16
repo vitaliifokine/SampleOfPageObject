@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;

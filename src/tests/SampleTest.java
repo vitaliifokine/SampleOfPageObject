@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.Feature;
 import org.testng.annotations.Test;
 import pages.BasePage;
@@ -8,10 +9,11 @@ import java.io.IOException;
 
 public class SampleTest extends BaseTest {
 
-    @Test()
+    @Test(description = "Guru 99")
     public void testGuruCom() throws IOException {
         wd.get("https://www.guru99.com");
         captureScreenshot(wd);
+        Allure.addAttachment("Sample", "");
     }
 
     @Test()
