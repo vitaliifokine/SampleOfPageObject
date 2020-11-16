@@ -12,6 +12,7 @@
         <module name="SampleOfPageObject1" />
         <module name="SampleOfPageObject" />
         <module name="SampleOfPageObject9998" />
+        <module name="SampleOfPageObject11" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
