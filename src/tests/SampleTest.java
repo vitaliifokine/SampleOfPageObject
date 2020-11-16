@@ -13,6 +13,7 @@ public class SampleTest extends BaseTest {
     public void testGuruCom() throws IOException {
         wd.get("https://www.guru99.com");
         captureScreenshot(wd);
+        saveScreenshot();
         Allure.addAttachment("Sample", "");
     }
 
