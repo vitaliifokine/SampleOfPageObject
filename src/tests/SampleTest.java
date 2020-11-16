@@ -13,8 +13,6 @@ public class SampleTest extends BaseTest {
     public void testGuruCom() throws IOException {
         wd.get("https://www.guru99.com");
         captureScreenshot(wd);
-        saveScreenshot();
-        Allure.addAttachment("Sample", "");
     }
 
     @Test()
@@ -35,6 +33,5 @@ public class SampleTest extends BaseTest {
     public void testUnitedNations() throws IOException {
         wd.get("https://www.un.org/en/");
         captureScreenshot(wd);
-        saveScreenshot();
     }
 }

@@ -64,12 +64,8 @@ public class BaseTest extends DriverFactory {
 
     @Step("Make a screenshot")
     @Attachment
-    public void captureScreenshot(WebDriver driver) throws IOException {
-        String extension = ".png";
-        File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        String timestamp = RandomString.make(4);
-        String date = new SimpleDateFormat("yyyy_MM_dd__hh_mm_ss").format(new Date());
-        FileUtils.copyFile(scrFile, new File("./src/screenshots/" + date + timestamp + extension));
+    public byte[] captureScreenshot(WebDriver driver) throws IOException {
+        return ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
     }
 
     @Step("Save attachment")
