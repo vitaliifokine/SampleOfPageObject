@@ -92,10 +92,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M1</version>
                 <configuration>
-                    <suiteXmlFiles>
-                        <!--suppress UnresolvedMavenProperty -->
-                        <suiteXmlFile>suites\${suiteFile}</suiteXmlFile>
-                    </suiteXmlFiles>
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
