@@ -73,14 +73,5 @@ public class BaseTest extends DriverFactory {
     public byte[] saveScreenshot() {
         return ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
     }
-
-//    @AfterMethod
-//    @Attachment
-//    public void takeScreenShotOnFailure(ITestResult testResult) throws IOException {
-//        if (testResult.getStatus() == ITestResult.SUCCESS) {
-//            File scrFile = ((TakesScreenshot)wd).getScreenshotAs(OutputType.FILE);
-//            FileUtils.copyFile(scrFile, new File("./src/screenshots/" + testResult.getName() + "-"
-//                    + Arrays.toString(testResult.getParameters()) +  ".jpg"));
-//        }
-//    }
+    
 }
