@@ -74,5 +74,5 @@ public class BaseTest extends DriverFactory {
         return ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
     }
 
-    
+
 }
