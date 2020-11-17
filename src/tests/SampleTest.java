@@ -34,4 +34,6 @@ public class SampleTest extends BaseTest {
         wd.get("https://www.un.org/en/");
         captureScreenshot(wd);
     }
+
+
 }
