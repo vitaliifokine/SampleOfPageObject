@@ -1,9 +1,12 @@
 package tests;
 
-import io.qameta.allure.Allure;
+import dataProviders.Destinations;
 import io.qameta.allure.Feature;
 import org.testng.annotations.Test;
 import pages.BasePage;
+import pages.GoogleMapsPage;
+import pages.GoogleResultPage;
+import pages.SearchPage;
 
 import java.io.IOException;
 
@@ -33,6 +36,21 @@ public class SampleTest extends BaseTest {
     public void testUnitedNations() throws IOException {
         wd.get("https://www.un.org/en/");
         captureScreenshot(wd);
+    }
+
+    @Test(description = "Google Maps", dataProvider = "Destinations", dataProviderClass = Destinations.class)
+    public void googleMapsDestinations(String from, String to) throws IOException {
+        SearchPage searchPage = new SearchPage(wd);
+        searchPage.openSearchPage()
+                .doSearchOf("Google Maps");
+
+        GoogleResultPage googleResultPage = new GoogleResultPage(wd);
+        googleResultPage.openFirstLink(wd);
+
+        // Google Maps
+        GoogleMapsPage googleMapsPage = new GoogleMapsPage(wd);
+        googleMapsPage.isPageDisplayed(wd)
+                .fromToDestination(wd, from, to);
     }
 
 

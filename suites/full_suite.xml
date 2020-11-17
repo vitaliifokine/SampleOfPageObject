@@ -3,9 +3,8 @@
 <suite name="example suite 1" parallel="methods" thread-count="10">
     <test name="Regression suite 1">
         <classes>
-            <class name="tests.Do"/>
-<!--            <class name="tests.URLTest"/>-->
-<!--            <class name="tests.SampleTest"/>-->
+            <class name="tests.URLTest"/>
+            <class name="tests.SampleTest"/>
         </classes>
     </test>
 </suite>

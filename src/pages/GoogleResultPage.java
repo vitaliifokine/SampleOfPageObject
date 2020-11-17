@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.util.List;
@@ -20,6 +22,9 @@ public class GoogleResultPage extends BasePage{
 
     @FindBy (css = "#topabar #resultStats")
     WebElement resultsQuantity;
+
+    @FindBy (css = "#logo > img")
+    WebElement logoResultPage;
 
     public GoogleResultPage(WebDriver driver) {
         super(driver);
@@ -59,6 +64,13 @@ public class GoogleResultPage extends BasePage{
     public Integer getResultQuantityOfSearches(){
         return Integer.parseInt(resultsQuantity.getText().split(" ")[1]
                 .replace(",", ""));
+    }
+
+
+    public void openFirstLink(WebDriver driver){
+        WebDriverWait wait = new WebDriverWait(driver, 15);
+        wait.until(ExpectedConditions.visibilityOf(logoResultPage));
+        headerDescription.get(0).click();
     }
 
 }

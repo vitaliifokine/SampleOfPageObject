@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.DriverFactory;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 
 public class BasePage extends DriverFactory {
@@ -26,6 +27,11 @@ public class BasePage extends DriverFactory {
         wait.until(ExpectedConditions.visibilityOf(webelement));
     }
 
+    public void waitUntilDisplayedBy(WebDriver driver, WebElement webelement){
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOf(webelement));
+    }
+
     @Step("Open Webpage")
     public void openWebPage(String webpage){
         wd.get(webpage);
@@ -36,5 +42,10 @@ public class BasePage extends DriverFactory {
     public byte[] saveScreenshot() {
         byte[] screenshot = ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
         return screenshot;
+    }
+
+    @Attachment
+    public byte[] captureScreenshot(WebDriver driver)throws IOException {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 }
