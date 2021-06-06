@@ -43,7 +43,6 @@ public class SearchPage extends BasePage {
         searchInput.clear();
         searchInput.sendKeys(searchText);
         searchInput.sendKeys(Keys.ENTER);
-        waitUntilDisplayedBy(searchResultLogo);
         return new GoogleResultPage(wd);
     }
 

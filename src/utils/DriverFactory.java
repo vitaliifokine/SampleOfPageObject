@@ -1,5 +1,6 @@
 package utils;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -11,10 +12,8 @@ public class DriverFactory {
     public static WebDriver wd;
 
     public static WebDriver setBrowser(String browser) {
-        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-        System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") + "\\drivers\\IEDriverServer.exe");
-        System.setProperty("webdriver.edge.driver", System.getProperty("user.dir") + "\\drivers\\MicrosoftWebDriver.exe");
         if ("chrome".equalsIgnoreCase(browser)) {
+            WebDriverManager.chromedriver().setup();
             return new ChromeDriver();
         } else if ("firefox".equalsIgnoreCase(browser)) {
             return new FirefoxDriver();
